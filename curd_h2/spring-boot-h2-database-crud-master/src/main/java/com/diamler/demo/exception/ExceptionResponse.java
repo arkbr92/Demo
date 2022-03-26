@@ -2,6 +2,12 @@ package com.diamler.demo.exception;
 
 import java.time.LocalDateTime;
 
+/**
+ * Exception Response
+ * @author arunkbr
+ *
+ */
+
 public class ExceptionResponse {
 
     private String message;

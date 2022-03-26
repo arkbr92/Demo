@@ -11,8 +11,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * Comment entity  
+ * @author arunkbr
+ *
+ */
+
 @Entity
-@EntityListeners(AuditingEntityListener.class)
+@Table(name = "comment")
 public class Comment {
 
     @Id
@@ -31,7 +37,6 @@ public class Comment {
 
     private boolean best;
 
-    //@CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date created;
@@ -40,7 +45,6 @@ public class Comment {
     @ManyToOne
     private Account createBy;
 
-    //@LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date update;

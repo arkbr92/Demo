@@ -2,13 +2,21 @@ package com.diamler.demo.model;
 
 import javax.persistence.*;
 
+import org.springframework.data.annotation.CreatedBy;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Post entity
+ * @author arunkbr
+ *
+ */
+
 @Entity
-@NamedQuery(name = "Post.findByTitle", query = "SELECT p FROM Post AS p WHERE p.title = ?1")
+@Table(name = "post")
 public class Post {
 
     @Id
@@ -17,13 +25,17 @@ public class Post {
 
     private String title;
 
-    @OneToMany(mappedBy = "post") //, cascade = CascadeType.ALL
+    @OneToMany(mappedBy = "post") //, cascade = CascadeType.ALL, cascade = CascadeType.PERSIST
     private List<Comment> comment;
     
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date created;
-
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "Id")
+    private Account createBy;
+    
     public Long getId() {
         return id;
     }
@@ -55,6 +67,13 @@ public class Post {
 	public void setComment(List<Comment> comment) {
 		this.comment = comment;
 	}
-    
+
+	public Account getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(Account createBy) {
+		this.createBy = createBy;
+	}
     
 }

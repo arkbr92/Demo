@@ -21,8 +21,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.diamler.demo.controller.PostController;
+import com.diamler.demo.model.Account;
 import com.diamler.demo.model.Comment;
 import com.diamler.demo.model.Post;
+import com.diamler.demo.repository.AccountsRepository;
 import com.diamler.demo.repository.PostRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,6 +32,8 @@ class PostServiceTest {
 
 	@Mock
 	private PostRepository postRepository;
+	@Mock
+	private AccountsRepository accountsRepository;
 
 	@InjectMocks
 	private PostService postService;
@@ -50,14 +54,23 @@ class PostServiceTest {
 		post.setComment(comments);
 		post.setCreated(new Date());
 		post.setId(12l);
+		Account account = new Account();
+		account.setId(12l);
+		post.setCreateBy(account);
 	}
 
 	@Test
 	void testSavePost() {
+		Account account = new Account();
+		account.setId(12l);
+		account.setFirstName("FirstName");
+		Optional<Account>  accountOptn= Optional.of(account);
+		//when(accountsRepository.findById(12l)).thenReturn(accountOptn);
 		when(postRepository.save(post)).thenReturn(post);
 		Post savePostResult = postService.savePost(post);
 		assertNotNull(savePostResult);
 		verify(postRepository, times(1)).save(Mockito.any(Post.class));
+		//verify(accountsRepository, times(1)).findById(12l);
 		assertEquals("PostTitle", savePostResult.getTitle());
 		assertEquals(12l, savePostResult.getId());
 		assertEquals("Comment1", savePostResult.getComment().get(0).getComment());

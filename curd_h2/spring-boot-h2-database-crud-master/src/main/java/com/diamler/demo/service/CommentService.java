@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.diamler.demo.model.Comment;
 import com.diamler.demo.repository.CommentRepository;
-
+/**
+ * Comment service
+ * @author arunkbr
+ *
+ */
 @Service
 public class CommentService {
 	
@@ -29,8 +33,8 @@ public class CommentService {
 	}
 
 
-	public List<Comment> getTop3CommentsByPostId(long postId) {
-		List<Comment> top3RecordsByPostId = commentRepository.getTop3RecordsByPostId(postId);
+	public List<Comment> getTop3CommentsByPostId(long postId, int topComments) {
+		List<Comment> top3RecordsByPostId = commentRepository.getTop3RecordsByPostId(postId, topComments);
 		return top3RecordsByPostId;
 	}
 

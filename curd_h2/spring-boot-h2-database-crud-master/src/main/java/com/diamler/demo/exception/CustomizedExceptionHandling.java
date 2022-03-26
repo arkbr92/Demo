@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+/**
+ * Global Exception Handling
+ * @author arunkbr
+ *
+ */
 @ControllerAdvice
 public class CustomizedExceptionHandling extends ResponseEntityExceptionHandler {
 
@@ -16,7 +21,7 @@ public class CustomizedExceptionHandling extends ResponseEntityExceptionHandler 
     public ResponseEntity<Object> handleExceptions( PostNotFoundException exception, WebRequest webRequest) {
         ExceptionResponse response = new ExceptionResponse();
         response.setDateTime(LocalDateTime.now());
-        response.setMessage("Not found");
+        response.setMessage("Post Not found");  
         ResponseEntity<Object> entity = new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
         return entity;
     }

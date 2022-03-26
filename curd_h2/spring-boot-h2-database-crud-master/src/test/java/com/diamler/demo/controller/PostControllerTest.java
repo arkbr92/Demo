@@ -24,6 +24,12 @@ import com.diamler.demo.model.Comment;
 import com.diamler.demo.model.Post;
 import com.diamler.demo.service.PostService;
 
+/**
+ * Post controller Test Operation
+ * @author arunkbr
+ *
+ */
+
 @ExtendWith(MockitoExtension.class)
 class PostControllerTest {
 
@@ -50,8 +56,10 @@ class PostControllerTest {
 		post.setCreated(new Date());
 		post.setId(12l);
 	}
-
-	@Test
+/**
+ * Save post testcase
+ */
+	@Test 
 	void testSavePost() {
 		when(postService.savePost(post)).thenReturn(post);
 		ResponseEntity<Post> savePostResult = postController.createPost(post);
@@ -64,6 +72,10 @@ class PostControllerTest {
 		assertEquals(2, savePostResult.getBody().getComment().get(0).getDown());
 		assertEquals(4, savePostResult.getBody().getComment().get(0).getUp());
 	}
+	
+	/**
+	 * Exception while save post
+	 */
 
 	@Test
 	void exceptionWhileSavePost() {
@@ -73,7 +85,9 @@ class PostControllerTest {
 		verify(postService, times(1)).savePost(Mockito.any(Post.class));
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, savePostResult.getStatusCode());
 	}
-	
+	/**
+	 * Test get post byId
+	 */
 	@Test
 	void testGetPostById() {
 		when(postService.getByPostId(12l)).thenReturn(post);

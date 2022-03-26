@@ -1,6 +1,27 @@
 package com.diamler.demo.exception;
 public class PostNotFoundException extends RuntimeException {
-    // Exception class 
+
+	public PostNotFoundException() {
+		super();
+	}
+
+	public PostNotFoundException(String message, Throwable cause, boolean enableSuppression,
+			boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
+
+	public PostNotFoundException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public PostNotFoundException(String message) {
+		super(message);
+	}
+
+	public PostNotFoundException(Throwable cause) {
+		super(cause);
+	}
+	
 	
 	
 }

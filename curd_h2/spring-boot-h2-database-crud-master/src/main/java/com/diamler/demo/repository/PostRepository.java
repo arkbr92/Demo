@@ -8,6 +8,11 @@ import com.diamler.demo.model.Post;
 
 import java.util.List;
 
+/**
+ * Post repository
+ * @author arunkbr
+ *
+ */
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("SELECT p FROM Post AS p WHERE p.title = ?1")
